@@ -1,2 +1,4 @@
 index.yaml
 .ropeproject
+.pyc
+*.pyc

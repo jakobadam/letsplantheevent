@@ -1,5 +1,5 @@
-application: eventplanner
-version: 1
+application: letsplantheevent
+version: todo-list-example
 runtime: python
 api_version: 1
 

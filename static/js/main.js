@@ -24,7 +24,7 @@ dojo.ready(function(){
   	widgetClass: dijit.form.TimeTextBox,
   	setValue: function(inRowIndex, inValue){
   		if(this.widget){
-  			this.widget.attr('value', new Date(inValue));
+  			this.widget.set('value', new Date(inValue));
   		}else{
   			this.inherited(arguments);
   		}

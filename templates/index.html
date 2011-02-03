@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}ToDo list{% endblock%}
+{% block description %}{% endblock%}
+{% block content %}
+  <script src="/js/base.js"></script>
+
+  <div dojoType="dijit.layout.TabContainer" doLayout="false" style="width:600px">
+    <div dojoType="dijit.layout.ContentPane" title="Tasks">
+      <table id="tasks_grid" style="height:300px"></table>
+      <div id="new_task_button" ></div>
+      <div id="save_tasks_button" ></div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+

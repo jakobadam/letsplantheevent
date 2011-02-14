@@ -4,6 +4,15 @@
 {% block content %}
   <script src="/js/main.js"></script>
 
+  <h1>Let's Plan The Event</h1>
+  <p>An example of using the Dojo toolkit. In particular, the
+  JsonRestStore and the DataGrid. The source is available
+  at <a href="https://github.com/jakobadam/letsplantheevent">github</a>. Letsplantheevent
+  is created in a series
+  of <a href="http://www.cabo.dk/blog/jakobs-blog/building-a-restful-ajax-app-using-dojo-and-python-werkzeug-part-1">blog
+  posts</a>
+  </p>
+
   <div dojoType="dijit.layout.TabContainer" doLayout="false" style="width:600px">
     <div dojoType="dijit.layout.ContentPane" title="Tasks">
       <table id="tasks_grid" style="height:300px"></table>
@@ -11,8 +20,6 @@
       <div id="save_tasks_button" ></div>
     </div>
   </div>
-
 </div>
-
 {% endblock %}
 

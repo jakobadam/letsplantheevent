@@ -1,6 +1,7 @@
-dojo.registerModulePath("evpl", "/js/evpl");
-dojo.require("evpl.formatters");
-dojo.require("evpl.stores");
+dojo.registerModulePath("lpte", "/js/lpte");
+
+dojo.require("lpte.formatters");
+dojo.require("lpte.stores");
 
 dojo.require("dijit.Dialog");
 dojo.require("dijit.form.Button");
@@ -35,7 +36,7 @@ dojo.ready(function(){
     dojox.grid.cells._Widget.markupFactory(node, cell);
   };
 
-  var tasks_grid_layout = [
+  var tasks_grid_structure = [
     { 
       field: 'name',
       editable: true
@@ -46,7 +47,7 @@ dojo.ready(function(){
       editable: true,
       type: dojox.grid.cells.DateTextBox,
       constraint: {formatLength: 'long', selector: "date"},
-      formatter: evpl.formatters.datetimeFormatter
+      formatter: lpte.formatters.datetimeFormatter
     },
     {
       field: 'starttime',
@@ -54,7 +55,7 @@ dojo.ready(function(){
       editable: true,
       type: dojox.grid.cells.TimeTextBox,
       constraint: {timePattern: "HH:mm", selector: "time"},
-      formatter: evpl.formatters.datetimeFormatter
+      formatter: lpte.formatters.datetimeFormatter
     },
     {
       field: 'enddate',
@@ -62,7 +63,7 @@ dojo.ready(function(){
       editable: true,
       type: dojox.grid.cells.DateTextBox,
       constraint: {formatLength: 'long', selector: "date"},
-      formatter: evpl.formatters.datetimeFormatter
+      formatter: lpte.formatters.datetimeFormatter
     },
     {
       field: 'endtime',
@@ -70,7 +71,7 @@ dojo.ready(function(){
       editable: true,
       type: dojox.grid.cells.TimeTextBox,
       constraint: {timePattern: "HH:mm", selector: "time"},
-      formatter: evpl.formatters.datetimeFormatter
+      formatter: lpte.formatters.datetimeFormatter
     },
     {
       name: 'Actions',
@@ -89,9 +90,8 @@ dojo.ready(function(){
 
   tasks_grid = new dojox.grid.DataGrid({
     name: "tasks",
-    structure: tasks_grid_layout, 
-    store:tasks,
-    autoheight: true}, 'tasks_grid');
+    structure: tasks_grid_structure, 
+    store:tasks}, 'tasks_grid');
 
   tasks_grid.startup();
 
@@ -113,7 +113,7 @@ dojo.ready(function(){
     },
     disabled: true                                                 
   }, 'save_tasks_button');
-  
+
   dojo.connect(tasks, "onNew",  function(event){
     save_tasks_button.set('disabled', false);
   });
@@ -121,4 +121,5 @@ dojo.ready(function(){
   dojo.connect(tasks, "onSet",  function(event){
     save_tasks_button.set('disabled', false);
   });
+
 });

@@ -1,10 +1,12 @@
-dojo.provide("evpl.models");
+dojo.provide("lpte.models");
 
 dojo.require("dijit.form.ValidationTextBox");
 dojo.require("dijit.form.TimeTextBox");
 dojo.require("dijit.form.DateTextBox");
 dojo.require("dijit.form.Button");
-dojo.require("evpl.stores");
+dojo.require("dijit.Dialog");
+
+dojo.require("lpte.stores");
 
 (function($){
    

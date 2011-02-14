@@ -1,4 +1,4 @@
-dojo.provide("evpl.formatters");
+dojo.provide("lpte.formatters");
 
 (function($){
 
@@ -6,6 +6,6 @@ dojo.provide("evpl.formatters");
    return dojo.date.locale.format(new Date(timestamp), this.constraint);
  }
 
- $.evpl.formatters.datetimeFormatter = datetimeFormatter;
+ $.lpte.formatters.datetimeFormatter = datetimeFormatter;
 
 })(window);

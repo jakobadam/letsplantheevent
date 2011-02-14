@@ -1,4 +1,5 @@
-dojo.provide("evpl.stores");
+dojo.provide("lpte.stores");
+dojo.require('dojox.data.JsonRestStore');
 
 (function($){
 

@@ -6,9 +6,11 @@ dojo.provide("evpl.stores");
     target:"/tasks/", 
 
     deleteById: function(id){
-      // console.log('tasks::deleteById', id);
+      console.log('tasks::deleteById', id);
       this.fetchItemByIdentity({identity: id, onItem: function(item){
+        console.log('tasks::deleteById', 'got item', item);
         tasks.deleteItem(item);
+        tasks.save();
       }});
     }
   });

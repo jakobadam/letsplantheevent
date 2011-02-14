@@ -1,47 +1,42 @@
+dojo.registerModulePath("evpl", "/js/evpl");
+dojo.require("evpl.formatters");
+dojo.require("evpl.stores");
+
 dojo.require("dijit.Dialog");
 dojo.require("dijit.form.Button");
-
+dojo.require("dijit.form.DateTextBox");
 dojo.require("dijit.layout.ContentPane");
 dojo.require("dijit.layout.TabContainer");
 
-dojo.require("dojo.data.ItemFileReadStore");
 dojo.require("dojox.data.JsonRestStore");
-
 dojo.require("dojox.grid.DataGrid");
 dojo.require("dojox.grid.cells.dijit");
 
-dojo.require("dijit.form.DateTextBox");
-
-dojo.registerModulePath("evpl", "/js/evpl");
-
-dojo.require("evpl.stores");
-dojo.require("evpl.formatters");
-
 dojo.ready(function(){
 
-	// wonder why this is not included in dojox.grid.cells.dijit.js
+  // wonder why this is not included in dojox.grid.cells.dijit.js
   dojo.declare("dojox.grid.cells.TimeTextBox", dojox.grid.cells._Widget, {
-  	widgetClass: dijit.form.TimeTextBox,
-  	setValue: function(inRowIndex, inValue){
-  		if(this.widget){
-  			this.widget.set('value', new Date(inValue));
-  		}else{
-  			this.inherited(arguments);
-  		}
-  	},
-  	getWidgetProps: function(inDatum){
-  		return dojo.mixin(this.inherited(arguments), {
-  			value: new Date(inDatum)
-  		});
-  	}
+    widgetClass: dijit.form.TimeTextBox,
+    setValue: function(inRowIndex, inValue){
+      if(this.widget){
+        this.widget.set('value', new Date(inValue));
+      }else{
+        this.inherited(arguments);
+      }
+    },
+    getWidgetProps: function(inDatum){
+      return dojo.mixin(this.inherited(arguments), {
+        value: new Date(inDatum)
+      });
+    }
   });
 
   dojox.grid.cells.TimeTextBox.markupFactory = function(node, cell){
-  	dojox.grid.cells._Widget.markupFactory(node, cell);
+    dojox.grid.cells._Widget.markupFactory(node, cell);
   };
 
   var tasks_grid_layout = [
-    { // A view is an array of cells
+    { 
       field: 'name',
       editable: true
     },

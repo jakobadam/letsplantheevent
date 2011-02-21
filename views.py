@@ -32,7 +32,10 @@ def new_task(handler, task):
 @handler.get('^/tasks/?')
 def get_tasks(handler):
     subscribe(handler)
-    return Task.to_json_list(TASKS.values())
+    tasks = Task.to_json_list(TASKS.values())
+    # FIXME: does the Subscribed header do anything??
+    # headers = {'Subscribed':'OK'}
+    return tasks
 
 @handler.get('^/tasks/(.+)/?')
 def get_task(handler, id):
@@ -54,18 +57,16 @@ def remove_task(handler, id):
         t = TASKS[id]
         del TASKS[id]
         publish(handler, t)
-        return tubes.Response(status=204)
-    else:
-        return tubes.Response("task not found", 404)
+    return tubes.Response(status=204)
 
-@handler.post('^/channels/?', produces=tubes.TEXT)
+@handler.post('^/channels/?$', produces=tubes.TEXT)
 def new_channel(handler):
     client_id = handler.headers.get('Create-Client-Id')
     if not client_id:
         return tubes.Response("Missing Create-Client-Id header!", status=200)
     clients[client_id] = {}
     logging.info('Creating new channel for client %s', client_id)
-    return channel.create_channel(client_id) # 
+    return channel.create_channel(client_id)  
 
 def subscribe(handler):
     if handler.headers.get("Subscribe"):
@@ -75,8 +76,10 @@ def subscribe(handler):
         if not resource in subscriptions:
             subscriptions[resource] = {}
         subscriptions[resource][client_id] = True
+        return True
     else:
         logging.info('byparsing subscribe since header not present')
+        return False
 
 def publish(handler, entity):
     client = handler.headers.get('Client-Id')

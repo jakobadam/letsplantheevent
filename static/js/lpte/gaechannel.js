@@ -21,8 +21,6 @@ dojo.require("dojox.data.restListener");
      var client_id = dojox.rpc.Client.clientId;
      var dfd = createChannel(client_id);
      var onLoad = function(token){
-       console.log('token', arguments);
-       
        channel = new goog.appengine.Channel(token);
        socket = channel.open();
        socket.onopen = function(){
@@ -37,14 +35,14 @@ dojo.require("dojox.data.restListener");
        // socket.onerror = onError;
        // socket.onclose = onClose;
        dojo.addOnUnload(function(){
-         channel.disconnect();
+         socket.disconnect();
        });
      };
 
      var onError = function(){
        console.log("onError", arguments);
      };
-     dojo.when(dfd, onLoad, onError);
+     return dfd.addCallbacks(onLoad, onError);
    }
    
    $.gaechannel = {

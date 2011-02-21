@@ -13,7 +13,8 @@ dojo.require("dijit.layout.TabContainer");
 dojo.require("dojox.data.JsonRestStore");
 
 // The presence of this enables differt RestChannel headers.
-dojo.require("dojox.cometd.RestChannels");
+// and opens channel to GAE!             
+dojo.require("lpte.RestChannels");
 
 dojo.require("dojox.grid.DataGrid");
 dojo.require("dojox.grid.cells.dijit");
@@ -138,8 +139,4 @@ dojo.ready(function(){
       save_tasks_button.set('disabled', false);      
     }
   });
-
-  // open channel to GAE!             
-  gaechannel.open();
-
 });

@@ -2,3 +2,7 @@ index.yaml
 .ropeproject
 .pyc
 *.pyc
+static/js/dijit
+static/js/dojo
+static/js/dojox
+                

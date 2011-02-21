@@ -10,4 +10,10 @@ class Task(object):
         self.enddate = enddate
         self.endtime = endtime
 
+    def get_absolute_url(self):
+        return "/tasks/%s" % (self.id)
+
+    def __str__(self):
+        return "Task: %s" % self.name
+
 Task = tubes.JsonClass()(Task)

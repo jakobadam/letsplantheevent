@@ -66,7 +66,6 @@ class TasksViewTest(unittest.TestCase):
         self.assertTrue(task != None)
         self.assertEquals(task.name, 'Task1')
 
-
     def test_PUT(self):
         views.TASKS['0'] = models.Task()
         r = self.c.put(path='/tasks/0',

@@ -2,6 +2,7 @@ dojo.registerModulePath("lpte", "/js/lpte");
 
 dojo.require("lpte.formatters");
 dojo.require("lpte.stores");
+dojo.require("lpte.gaechannel");
 
 dojo.require("dijit.Dialog");
 dojo.require("dijit.form.Button");
@@ -10,6 +11,10 @@ dojo.require("dijit.layout.ContentPane");
 dojo.require("dijit.layout.TabContainer");
 
 dojo.require("dojox.data.JsonRestStore");
+
+// The presence of this enables differt RestChannel headers.
+dojo.require("dojox.cometd.RestChannels");
+
 dojo.require("dojox.grid.DataGrid");
 dojo.require("dojox.grid.cells.dijit");
 
@@ -32,6 +37,7 @@ dojo.ready(function(){
     }
   });
 
+  // for declarative use (not used in the example)
   dojox.grid.cells.TimeTextBox.markupFactory = function(node, cell){
     dojox.grid.cells._Widget.markupFactory(node, cell);
   };
@@ -75,15 +81,13 @@ dojo.ready(function(){
     },
     {
       name: 'Actions',
-      formatter: function(val, rowIdx, cell){
-        var item = this.grid.getItem(rowIdx);
-        if(!item.id){
-          return "";
+      field: 'id',
+      formatter: function(id, rowIdx, cell){
+        if(!id){
+          return "<em>unsaved</em>";
         }
-        var buttons = [];
-        var delete_action = "tasks.deleteById('" + item.id + "');";
-        buttons.push('<button onclick="' + delete_action + '">delete</button>');
-        return buttons.join('');
+        var delete_action = "tasks.deleteById('" + id + "');";
+        return '<button onclick="' + delete_action + '">delete</button>';
       }
     }
   ];
@@ -107,19 +111,35 @@ dojo.ready(function(){
   var save_tasks_button = new dijit.form.Button({
     label: "Save",
     onClick: function(){
-      tasks.save({onComplete: function(){
-        save_tasks_button.set('disabled', true);
-      }});
+      console.log("save_button::click");
+      tasks.save({
+        onComplete: function(){
+          console.log("save_button::onComplete");
+          save_tasks_button.set('disabled', true);
+        },
+        onError: function(){
+          console.log("WTF?", arguments);
+        }         
+      });
     },
     disabled: true                                                 
   }, 'save_tasks_button');
 
   dojo.connect(tasks, "onNew",  function(event){
-    save_tasks_button.set('disabled', false);
+    console.log("tasks::onNew", event);
+    if(tasks.isDirty()){
+      save_tasks_button.set('disabled', false);      
+    }
   });
   
   dojo.connect(tasks, "onSet",  function(event){
-    save_tasks_button.set('disabled', false);
+    console.log("tasks::onSet", event);
+    if(tasks.isDirty()){
+      save_tasks_button.set('disabled', false);      
+    }
   });
+
+  // open channel to GAE!             
+  gaechannel.open();
 
 });

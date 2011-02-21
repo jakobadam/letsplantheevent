@@ -1,7 +1,13 @@
 application: letsplantheevent
-version: todo-list-example
+version: production
 runtime: python
 api_version: 1
+
+skip_files:
+- ^(.*/)?(dojo|dojox|dijit)(.*)
+
+builtins:
+- deferred: on
 
 handlers:
 - url: /img

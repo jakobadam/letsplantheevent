@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}ToDo list Example{% endblock%}
+{% block title %}Task list: dojodata grid and JsonRestStore example{% endblock%}
 {% block description %}{% endblock%}
 {% block content %}
-  <script src="/js/main.js"></script>
+
 
   <h1>Let's Plan The Event</h1>
   <p>An example of using the Dojo toolkit. In particular, the
@@ -10,8 +10,9 @@
   at <a href="https://github.com/jakobadam/letsplantheevent">github</a>. Letsplantheevent
   is created in a series
   of <a href="http://www.cabo.dk/blog/jakobs-blog/building-a-restful-ajax-app-using-dojo-and-python-werkzeug-part-1">blog
-  posts</a>
+  posts</a>. 
   </p>
+  <p>Note: The example uses an in-memory datastore at the back-end.</p>
 
   <div dojoType="dijit.layout.TabContainer" doLayout="false" style="width:600px">
     <div dojoType="dijit.layout.ContentPane" title="Tasks">
@@ -21,5 +22,8 @@
     </div>
   </div>
 </div>
+
+<script src="/_ah/channel/jsapi"></script>
+<script src="/js/main.js"></script>
 {% endblock %}
 

@@ -1,9 +1,11 @@
+from google.appengine.dist import use_library
+use_library('django', '1.1')
+
 import tubes
 import os
 
 from google.appengine.ext.webapp import template
 from django.template import TemplateDoesNotExist
-
 from views import handler
 
 TEMPLATE_DIR = "templates"
